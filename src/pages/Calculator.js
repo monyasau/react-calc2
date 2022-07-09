@@ -13,6 +13,13 @@ export default class Calculator extends Component {
     };
   }
 
+  // cal = (...num) => {
+
+  // console.log( evil('12/5*9+9.4*2') ); // => 40.4
+  // };
+  cal = (num) => {
+    return new Function("return " + num)();
+  };
   inputFilter = (event) => {
     //recieve the keyboard input as a parameter
     if (event.key === ".") {
@@ -34,9 +41,9 @@ export default class Calculator extends Component {
       this.state.inputedCalculationQuery === ""
     ) {
       // check if the calculator state is empty
-      let unvreifiedInput = !/[a-zA-Z]/.test(event.key);
+      let unverifiedInput = !/[a-zA-Z]/.test(event.key);
       // check if the input is not a letter
-      if (unvreifiedInput === true) {
+      if (unverifiedInput === true) {
         let verifiedInput = event.key;
         // and update the state if its not a letter
         this.setState({
@@ -56,7 +63,8 @@ export default class Calculator extends Component {
       event.keyCode === 13
     ) {
       // then solve the calculation
-      let evalResult = eval(this.state.inputedCalculationQuery);
+      // let evalResult = this.cal(this.state.inputedCalculationQuery);
+      let evalResult = this.cal(this.state.inputedCalculationQuery);
       // update the answer
       this.setState({
         answer: evalResult,
@@ -88,9 +96,9 @@ export default class Calculator extends Component {
     let queriesToArray = this.state.inputedCalculationQuery.split("");
     //then remove the last value
     queriesToArray.pop();
-  //then convert back to a string
+    //then convert back to a string
     queriesToArray = queriesToArray.join("");
-//and update state
+    //and update state
     this.setState({
       inputedCalculationQuery: queriesToArray,
     });
@@ -117,7 +125,8 @@ export default class Calculator extends Component {
       let value = e.target.getAttribute("id");
       if (!(this.state.inputedCalculationQuery === "") && value === "=") {
         //when the equal button is pressed solve the calculation
-        let evalResult = eval(this.state.inputedCalculationQuery);
+
+        let evalResult = this.cal(this.state.inputedCalculationQuery);
         this.setState({
           answer: evalResult,
           inputedCalculationQuery: evalResult,
@@ -174,6 +183,7 @@ export default class Calculator extends Component {
               className="clear-button border-1-5 rounded-3 fw-bold  h6 me-auto col col-3"
               title="Clear the calculator memory"
               onClick={Clear}
+              id="clear"
             >
               AC
             </button>
@@ -233,7 +243,7 @@ export default class Calculator extends Component {
         <div className="border border-1 p-1 w-fc mx-auto mt-4">
           Keyboard input is allowed
         </div>
- 
+        {this.state.inputedCalculationQuery}
       </>
     );
   }
