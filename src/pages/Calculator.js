@@ -1,3 +1,4 @@
+/* eslint-disable no-new-func */
 import React, { Component } from "react";
 import NumberButton from "../components/NumberButton";
 import OperatorButton from "../components/OperatorButton";
@@ -18,7 +19,7 @@ export default class Calculator extends Component {
   // console.log( evil('12/5*9+9.4*2') ); // => 40.4
   // };
   cal = (num) => {
-    return new Function("return " + num)();
+    return Function("return " + num)();
   };
   inputFilter = (event) => {
     //recieve the keyboard input as a parameter
