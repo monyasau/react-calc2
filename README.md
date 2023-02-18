@@ -4,7 +4,7 @@ This is a simple calculator built with React.js. It can perform basic arithmetic
 Live Links
 You can see the calculator in action at the following links:
 
-[Link 1]
+[https://react-calculator2.netlify.app/], 
 [Link 2]
 
 
